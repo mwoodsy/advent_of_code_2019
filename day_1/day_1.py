@@ -1,10 +1,10 @@
 def returnFuel1(mass):
-    return (int(mass/3))-2
+    return (mass//3)-2
 
 def returnFuel2(mass):
     fuel = 0
     while mass > 5:
-        temp = (int(mass/3)-2)
+        temp = (mass//3)-2
         fuel += temp
         mass = temp
     return fuel
