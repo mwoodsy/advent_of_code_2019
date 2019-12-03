@@ -19,13 +19,10 @@ def getFinalZeroPosition(tOpcodes, n, v):
             in1 = tOpcodes[index+1]
             in2 = tOpcodes[index+2]
             in3 = tOpcodes[index+3]
-
             if oc == 1:
                 tOpcodes[in3] = tOpcodes[in1]+tOpcodes[in2]
-
             elif oc == 2:
                 tOpcodes[in3] = tOpcodes[in1]*tOpcodes[in2]
-
             else:
                 print("something is wrong",oc, index)
                 return -1
