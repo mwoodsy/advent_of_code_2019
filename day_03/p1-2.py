@@ -5,8 +5,8 @@ wireB = 'L1008,U23,L793,D944,L109,U830,L103,U255,L391,D574,R433,U468,R800,D831,L
 #wireB = 'U62,R66,U55,R34,D71,R55,D58,R83'.split(',')
 #wireA = 'R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51'.split(',')
 #wireB = 'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7'.split(',')
-#wireA = 'R8,U5,L5,D3'.split(',')
-#wireB = 'U7,R6,D4,L4'.split(',')
+wireA = 'R8,U5,L5,D3'.split(',')
+wireB = 'U7,R6,D4,L4'.split(',')
 
 def getWirePath(wire):
     path = [tuple([0,0])]
@@ -58,7 +58,6 @@ for x in range(len(intersects)):
     for y in range(len(intersects)):
         b = indexes2[y]
         if path1[a] == path2[b]:
-            print(a,b, path1[a], path2[b], a+b)
             intersectSteps.append(a+b+2) # +2 for the step from 0,0 to first position
 
 
