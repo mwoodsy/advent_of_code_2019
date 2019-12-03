@@ -31,19 +31,19 @@ def getWirePath(wire):
 path1 = getWirePath(wireA)[1:]
 path2 = getWirePath(wireB)[1:]
 
-minDist = -1
-intersects = []
-indexes1 = []
+intersects = set(path1).intersection(set(path2))
+distances = []
+for x in intersects:
+    distances.append(abs(x[0])+abs(x[1]))
+
+distances.sort()
+
 i = 0
-## Very Very inefficient, probably should fix this.
+indexes1 = []
 for x in path1:
-   if x in path2:
-        intersects.append(x)
-        indexes1.append(i)    
-        distance = abs(x[0]) + abs(x[1])
-        if distance < minDist or minDist == -1:
-           minDist = distance
-   i += 1
+    if x in intersects:
+        indexes1.append(i)
+    i += 1
 
 i = 0
 indexes2 = []
@@ -62,6 +62,6 @@ for x in range(len(intersects)):
 
 
 intersectSteps.sort()
-print("Part 1:", minDist)
+print("Part 1:", distances[0])
 print("Part 2:", intersectSteps[0])
         
