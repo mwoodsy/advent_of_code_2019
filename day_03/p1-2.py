@@ -28,16 +28,17 @@ def getWirePath(wire):
                 quit()
     return path
 
-path1 = getWirePath(wireA)[1:]
-path2 = getWirePath(wireB)[1:]
+path1 = getWirePath(wireA)
+path2 = getWirePath(wireB)
 
+## Part one logic
 intersects = set(path1).intersection(set(path2))
-distances = []
+distancesFromStart = []
 for x in intersects:
-    distances.append(abs(x[0])+abs(x[1]))
+    distancesFromStart.append(abs(x[0])+abs(x[1]))
 
-distances.sort()
 
+## Part 2 logic
 i = 0
 indexes1 = []
 for x in path1:
@@ -58,10 +59,14 @@ for x in range(len(intersects)):
     for y in range(len(intersects)):
         b = indexes2[y]
         if path1[a] == path2[b]:
-            intersectSteps.append(a+b+2) # +2 for the step from 0,0 to first position
+            intersectSteps.append(a+b)
 
 
+# sort lists to find closest
+distancesFromStart.sort()
 intersectSteps.sort()
-print("Part 1:", distances[0])
-print("Part 2:", intersectSteps[0])
+
+# use index 1 since 0 is 0,0
+print("Part 1:", distancesFromStart[1])
+print("Part 2:", intersectSteps[1])
         
