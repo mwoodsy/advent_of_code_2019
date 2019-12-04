@@ -32,6 +32,7 @@ def getFinalZeroPosition(tOpcodes, n, v):
 
 print("Part 1:",getFinalZeroPosition(opcodes.copy(),12,2))
 
+
 for n in range(100):
     for v in range(100):
         if getFinalZeroPosition(opcodes.copy(),n,v) == 19690720:
