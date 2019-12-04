@@ -8,6 +8,9 @@ wireB = 'L1008,U23,L793,D944,L109,U830,L103,U255,L391,D574,R433,U468,R800,D831,L
 #wireA = 'R8,U5,L5,D3'.split(',')
 #wireB = 'U7,R6,D4,L4'.split(',')
 
+
+## Returns a list of tuples for each point of the wire
+## ex: [(0,0),(0,1),(0,2)...]
 def getWirePath(wire):
     path = [tuple([0,0])]
     for move in wire:
@@ -28,31 +31,39 @@ def getWirePath(wire):
                 quit()
     return path
 
+## Get paths for each wire
 path1 = getWirePath(wireA)
 path2 = getWirePath(wireB)
 
 ## Part one logic
+## Get the intersect of path1 and path2
 intersects = set(path1).intersection(set(path2))
 distancesFromStart = []
 for x in intersects:
+    # Append distance intersect is from start
     distancesFromStart.append(abs(x[0])+abs(x[1]))
 
+# Sort intersects will return closest to furtherest
+distancesFromStart.sort()
+## Part 1 Complete
 
 ## Part 2 logic
-i = 0
-indexes1 = []
-for x in path1:
-    if x in intersects:
-        indexes1.append(i)
-    i += 1
 
-i = 0
-indexes2 = []
-for x in path2:
-    if x in intersects:
-        indexes2.append(i)
-    i += 1
+## Returns list of indexes (steps) where wire meets intersect
+def getIndexesOfIntersects(p, x):
+    i = 0
+    indexes = []
+    for a in p:
+        if a in x:
+            indexes.append(i)
+        i += 1
+    return indexes
 
+## Number of steps it takes to get to each intersection
+indexes1 = getIndexesOfIntersects(path1, intersects)
+indexes2 = getIndexesOfIntersects(path2, intersects)
+
+## for each intersect find the number of steps from each wire and sum them.
 intersectSteps = []
 for x in range(len(intersects)):
     a = indexes1[x]
@@ -62,9 +73,9 @@ for x in range(len(intersects)):
             intersectSteps.append(a+b)
 
 
-# sort lists to find closest
-distancesFromStart.sort()
+# sort list to find closest
 intersectSteps.sort()
+## Part 2 Complete
 
 # use index 1 since 0 is 0,0
 print("Part 1:", distancesFromStart[1])
