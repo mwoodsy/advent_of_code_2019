@@ -1,9 +1,11 @@
+import time
+start_time = time.time()
+
 datafile = 'data.txt'
 with open(datafile) as df:
    data = df.readline()
 
 opcodes = [int(n) for n in data.split(',')]
-
 
 
 def getFinalZeroPosition(tOpcodes, n, v):
@@ -34,4 +36,5 @@ for n in range(100):
     for v in range(100):
         if getFinalZeroPosition(opcodes.copy(),n,v) == 19690720:
             print("Part 2:", (100*n)+v)
+            print("--- %s seconds ---" % (time.time() - start_time))
             quit()
