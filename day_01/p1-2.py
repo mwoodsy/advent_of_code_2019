@@ -1,3 +1,6 @@
+import time
+start_time = time.time()
+
 def returnFuel1(mass):
     return (mass//3)-2
 
@@ -19,3 +22,4 @@ part2 = [returnFuel2(int(x.strip())) for x in lines]
 print("Part 1:", str(sum(part1)))
 print("Part 2:", str(sum(part2)))
 
+print("--- %s seconds ---" % (time.time() - start_time))
