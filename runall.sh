@@ -17,3 +17,7 @@ echo "-- Day 04 --"
 cd day_04
 python3 p1-2.py
 cd ..
+echo "-- Day 05 --"
+cd day_05
+python3 p1-2.py
+cd ..
