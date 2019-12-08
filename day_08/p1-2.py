@@ -68,7 +68,7 @@ for layer in layers:
             if pixel == '0':
                 password[y][x] = ' '
             elif pixel == '1':
-                password[y][x] = 'X'
+                password[y][x] = u"\u2588"
             x += 1
     loop += 1
 
