@@ -34,10 +34,10 @@ def getErrorCode(tOpcodes, dCode, indexList):
                 tOpcodes[in1] = dCode.pop()
                 index = index+2
             elif oc[0] == 4:
-                if tOpcodes[in1] != 0:
-                    indexList[0] = index+2
-                    return tOpcodes[in1]
-                index = index+2
+                #if tOpcodes[in1] != 0:
+                indexList[0] = index+2
+                return tOpcodes[in1]
+                #index = index+2
             elif oc[0] == 5:
                 if tOpcodes[in1] != 0:
                     in2 = tOpcodes[index+2] if oc[2]==0 else index+2
@@ -76,17 +76,15 @@ outputs = []
 for inst in tests:
     previous = 0
     temp = []
-    if inst[0] == '0':
-        for x in inst:
-            temp.append(getErrorCode(opcodes.copy(),[previous,int(x)],[0]))
-            previous = int(temp[-1])
-        outputs.append(temp[-1])
+    for x in inst:
+        temp.append(getErrorCode(opcodes.copy(),[previous,int(x)],[0]))
+        previous = int(temp[-1])
+    outputs.append(temp[-1])
 
 part1 = max(outputs)
-#print(outputs)
 print("Part 1:", part1)
 
-#quit()
+
 
 r='98765'
 q=list(itertools.permutations(r,len(r)))
@@ -95,31 +93,30 @@ for i in range(0,len(q)):
     tests.append(''.join(q[i]))
 outputs = [1]
 for inst in tests:
-    if inst[0] == '9':
-        ampA = opcodes.copy()
-        ampB = opcodes.copy()
-        ampC = opcodes.copy()
-        ampD = opcodes.copy()
-        ampE = opcodes.copy()
+    ampA = opcodes.copy()
+    ampB = opcodes.copy()
+    ampC = opcodes.copy()
+    ampD = opcodes.copy()
+    ampE = opcodes.copy()
 
-        ind1 = [0]
-        ind2 = [0]
-        ind3 = [0]
-        ind4 = [0]
-        ind5 = [0]
+    ind1 = [0]
+    ind2 = [0]
+    ind3 = [0]
+    ind4 = [0]
+    ind5 = [0]
 
-        outA = getErrorCode(ampA,  [0,   int(inst[0])],   ind1)
-        outB = getErrorCode(ampB,  [outA,int(inst[1])],   ind2)
-        outC = getErrorCode(ampC,  [outB,int(inst[2])],   ind3)
-        outD = getErrorCode(ampD,  [outC,int(inst[3])],   ind4)
-        outE = getErrorCode(ampE,  [outD,int(inst[4])],   ind5)
-        while isinstance(outE, int):
-            outA = getErrorCode(ampA,[outE],ind1)
-            outB = getErrorCode(ampB,[outA],ind2)
-            outC = getErrorCode(ampC,[outB],ind3)
-            outD = getErrorCode(ampD,[outC],ind4)
-            outE = getErrorCode(ampE,[outD],ind5)
-        outputs.append(int(outE))
+    outA = getErrorCode(ampA,  [0,   int(inst[0])],   ind1)
+    outB = getErrorCode(ampB,  [outA,int(inst[1])],   ind2)
+    outC = getErrorCode(ampC,  [outB,int(inst[2])],   ind3)
+    outD = getErrorCode(ampD,  [outC,int(inst[3])],   ind4)
+    outE = getErrorCode(ampE,  [outD,int(inst[4])],   ind5)
+    while isinstance(outE, int):
+        outA = getErrorCode(ampA,[outE],ind1)
+        outB = getErrorCode(ampB,[outA],ind2)
+        outC = getErrorCode(ampC,[outB],ind3)
+        outD = getErrorCode(ampD,[outC],ind4)
+        outE = getErrorCode(ampE,[outD],ind5)
+    outputs.append(int(outE))
 best = outputs.index(max(outputs))
 part2 = max(outputs)
 print("Part 2:", part2)
