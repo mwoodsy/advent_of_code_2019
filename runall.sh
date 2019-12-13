@@ -43,8 +43,7 @@ python3 p1_2.py
 cd ..
 echo "-- Day 11 --"
 cd day_11
-python3 p1.py
-python3 p2.py
+python3 both.py
 cd ..
 echo "-- Day 12 --"
 cd day_12
