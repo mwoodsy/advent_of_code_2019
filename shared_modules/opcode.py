@@ -19,9 +19,9 @@ def increaseArray(atleast, tOpcodes):
     while atleast > len(tOpcodes)-1:
         tOpcodes.append(0)
 
-def getErrorCode(tOpcodes, dCode, indexList):
+def getErrorCode(tOpcodes, dCode, indexList, relIndexList):
     index = indexList[0]
-    relIndex = 0
+    relIndex = relIndexList[0]
     while True:
         oc = getModes(tOpcodes[index])
         if oc[0]==99:
@@ -29,18 +29,20 @@ def getErrorCode(tOpcodes, dCode, indexList):
         else:
             in1 = getIndexByMode(oc[1], tOpcodes[index+1], index+1, relIndex)
             increaseArray(in1, tOpcodes)
-            
-            try:
-                in2 = getIndexByMode(oc[2], tOpcodes[index+2], index+2, relIndex)
-                increaseArray(in2, tOpcodes)
-            except IndexError:
-                in2 = 0
-            
-            try:
-                in3 = getIndexByMode(oc[3], tOpcodes[index+3], index+3, relIndex)
-                increaseArray(in3, tOpcodes)
-            except IndexError:
-                in3 = 0
+
+            if oc[0] in [1,2,5,6,7,8]:
+                try:
+                    in2 = getIndexByMode(oc[2], tOpcodes[index+2], index+2, relIndex)
+                    increaseArray(in2, tOpcodes)
+                except IndexError:
+                    in2 = 0            
+                try:
+                    in3 = getIndexByMode(oc[3], tOpcodes[index+3], index+3, relIndex)
+                    increaseArray(in3, tOpcodes)
+                except IndexError:
+                    in3 = 0
+
+
             if oc[0] == 1:
                 tOpcodes[in3] = tOpcodes[in1]+tOpcodes[in2]
                 index = index+4
@@ -71,6 +73,7 @@ def getErrorCode(tOpcodes, dCode, indexList):
                 index = index+4
             elif oc[0] == 9:
                 relIndex = relIndex + tOpcodes[in1]
+                relIndexList[0] = relIndex
                 index = index+2
             else:
                 print("something is wrong",oc, index)

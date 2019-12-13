@@ -12,10 +12,10 @@ data = '1102,34463338,34463338,63,1007,63,34463338,63,1005,63,53,1101,3,0,1000,1
 
 opcodes = [int(n) for n in data.split(',')]
 
-part1 = opcode.getErrorCode(opcodes, [1],[0])
+part1 = opcode.getErrorCode(opcodes, [1],[0],[0])
 print("part 1:", part1)
 
-part2 = opcode.getErrorCode(opcodes, [2],[0])
+part2 = opcode.getErrorCode(opcodes, [2],[0],[0])
 print("part 2:", part2)
 
 

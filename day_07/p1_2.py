@@ -23,7 +23,7 @@ for inst in tests:
     previous = 0
     temp = []
     for x in inst:
-        temp.append(opcode.getErrorCode(opcodes.copy(),[previous,int(x)],[0]))
+        temp.append(opcode.getErrorCode(opcodes.copy(),[previous,int(x)],[0],[0]))
         previous = int(temp[-1])
     outputs.append(temp[-1])
 
@@ -51,17 +51,17 @@ for inst in tests:
     ind4 = [0]
     ind5 = [0]
 
-    outA = opcode.getErrorCode(ampA,  [0,   int(inst[0])],   ind1)
-    outB = opcode.getErrorCode(ampB,  [outA,int(inst[1])],   ind2)
-    outC = opcode.getErrorCode(ampC,  [outB,int(inst[2])],   ind3)
-    outD = opcode.getErrorCode(ampD,  [outC,int(inst[3])],   ind4)
-    outE = opcode.getErrorCode(ampE,  [outD,int(inst[4])],   ind5)
+    outA = opcode.getErrorCode(ampA,  [0,   int(inst[0])],   ind1,[0])
+    outB = opcode.getErrorCode(ampB,  [outA,int(inst[1])],   ind2,[0])
+    outC = opcode.getErrorCode(ampC,  [outB,int(inst[2])],   ind3,[0])
+    outD = opcode.getErrorCode(ampD,  [outC,int(inst[3])],   ind4,[0])
+    outE = opcode.getErrorCode(ampE,  [outD,int(inst[4])],   ind5,[0])
     while isinstance(outE, int):
-        outA = opcode.getErrorCode(ampA,[outE],ind1)
-        outB = opcode.getErrorCode(ampB,[outA],ind2)
-        outC = opcode.getErrorCode(ampC,[outB],ind3)
-        outD = opcode.getErrorCode(ampD,[outC],ind4)
-        outE = opcode.getErrorCode(ampE,[outD],ind5)
+        outA = opcode.getErrorCode(ampA,[outE],ind1,[0])
+        outB = opcode.getErrorCode(ampB,[outA],ind2,[0])
+        outC = opcode.getErrorCode(ampC,[outB],ind3,[0])
+        outD = opcode.getErrorCode(ampD,[outC],ind4,[0])
+        outE = opcode.getErrorCode(ampE,[outD],ind5,[0])
     outputs.append(max(outE))
 best = outputs.index(max(outputs))
 part2 = max(outputs)
